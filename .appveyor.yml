@@ -18,6 +18,9 @@ install:
     # if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
     # $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
     pip install --disable-pip-version-check --user --upgrade pip setuptools wheel pybind11 cibuildwheel
+    dir C:\Python27
+    echo
+    dir C:\Python27\Scripts
 build_script:
 - ps: |
     cibuildwheel --output-dir wheelhouse
