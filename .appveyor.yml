@@ -1,29 +1,27 @@
 version: '{build}'
 image: Visual Studio 2015
-# platform:
-# - x86
-# - x64
-# environment:
-#   global:
-#     DISTUTILS_USE_SDK: 1
-#     MSSdk: 1
-#   matrix:
-#   - PYTHON: 27
-#   - PYTHON: 34
-#   - PYTHON: 35
-#   - PYTHON: 36
+platform:
+- x86
+- x64
+environment:
+  global:
+    DISTUTILS_USE_SDK: 1
+    MSSdk: 1
+  matrix:
+  - PYTHON: 27
+  - PYTHON: 34
+  - PYTHON: 35
+  - PYTHON: 36
 install:
 # - cmd: '"%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" %PLATFORM%'
 - cmd: |
-    rem if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
-    rem $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
+    if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
+    $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
     pip install --disable-pip-version-check --upgrade pip setuptools wheel pybind11 cibuildwheel
-    rem dir C:\Python27
-    rem echo
-    rem dir C:\Python27\Scripts
 build_script:
 - cmd: |
-    cibuildwheel --output-dir wheelhouse
+    rem cibuildwheel --output-dir wheelhouse
+    pip wheel --no-deps --verbose -w wheelhouse 
 artifacts:
   - path: "wheelhouse/*.whl"
     name: Wheels
