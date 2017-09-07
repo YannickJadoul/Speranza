@@ -14,15 +14,15 @@ image: Visual Studio 2015
 #   - PYTHON: 36
 install:
 # - cmd: '"%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" %PLATFORM%'
-- ps: |
-    # if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
-    # $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
+- cmd: |
+    rem if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
+    rem $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
     pip install --disable-pip-version-check --upgrade pip setuptools wheel pybind11 cibuildwheel
-    # dir C:\Python27
-    # echo
-    # dir C:\Python27\Scripts
+    rem dir C:\Python27
+    rem echo
+    rem dir C:\Python27\Scripts
 build_script:
-- ps: |
+- cmd: |
     cibuildwheel --output-dir wheelhouse
 artifacts:
   - path: "wheelhouse/*.whl"
