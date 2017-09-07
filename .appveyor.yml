@@ -21,7 +21,7 @@ install:
 build_script:
 - cmd: |
     rem cibuildwheel --output-dir wheelhouse
-    pip wheel --no-deps --verbose -w wheelhouse 
+    pip wheel --no-deps --verbose -w wheelhouse .
 artifacts:
   - path: "wheelhouse/*.whl"
     name: Wheels
