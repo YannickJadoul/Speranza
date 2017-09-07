@@ -14,7 +14,7 @@ environment:
   - PYTHON: 36
 install:
 # - cmd: '"%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" %PLATFORM%'
-- cmd: |
+- ps: |
     if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
     $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
     pip install --disable-pip-version-check --upgrade pip setuptools wheel pybind11 cibuildwheel
