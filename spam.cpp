@@ -1,5 +1,7 @@
 #include <Python.h>
 
+#include <iostream>
+
 static PyObject *
 spam_system(PyObject *self, PyObject *args)
 {
@@ -8,7 +10,9 @@ spam_system(PyObject *self, PyObject *args)
 
     if (!PyArg_ParseTuple(args, "s", &command))
         return NULL;
-    sts = system(command);
+    
+    std::cout << command << std::endl;
+
     return PyLong_FromLong(sts);
 }
 
