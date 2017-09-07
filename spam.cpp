@@ -1,6 +1,7 @@
 #include <Python.h>
 
 #include <iostream>
+#include <memory>
 
 static PyObject *
 spam_system(PyObject *self, PyObject *args)
@@ -12,6 +13,7 @@ spam_system(PyObject *self, PyObject *args)
         return NULL;
     
     std::cout << command << std::endl;
+    std::unique_ptr<int> test = nullptr;
 
     return PyLong_FromLong(sts);
 }
